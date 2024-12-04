@@ -3,6 +3,7 @@
 import unittest
 
 from custom_components.bluetti_bt.bluetti_bt_lib.utils.device_builder import build_device
+from custom_components.bluetti_bt.bluetti_bt_lib.devices.ac50b import AC50B
 from custom_components.bluetti_bt.bluetti_bt_lib.devices.ac60 import AC60
 from custom_components.bluetti_bt.bluetti_bt_lib.devices.ac70 import AC70
 from custom_components.bluetti_bt.bluetti_bt_lib.devices.ac70p import AC70P
@@ -26,6 +27,14 @@ class TestDeviceBuilder(unittest.TestCase):
         bt_name = "PBOX56786746478"
         with self.assertRaises(TypeError):
             build_device(bt_addr, bt_name)
+
+    def test_build_ac50b(self):
+        bt_addr = "aa:bb:cc:dd:ee:ff"
+        bt_name = "AC50B56786746478"
+        built = build_device(bt_addr, bt_name)
+
+        self.assertIsInstance(built, AC50B)
+        self.assertEqual(built.address, bt_addr)
 
     def test_build_ac60(self):
         bt_addr = "aa:bb:cc:dd:ee:ff"
